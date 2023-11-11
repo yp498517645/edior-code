@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import regex from "@/regex";
 
 //基础
 interface basicToken {
@@ -12,8 +13,7 @@ interface HeadToken extends basicToken {
 
 export const initHeadToken = (lineStr: String): HeadToken | basicToken => {
   const str = lineStr.trimEnd();
-  const regexHead = /^#{1,5}\s/g;
-  let isHeadArr = str.match(regexHead) ?? [];
+  let isHeadArr = str.match(regex.Head) ?? [];
   let level = isHeadArr[0] ? isHeadArr[0].length - 1 : 0;
   const content = level !== 0 ? str.substring(level + 1) : str;
   if (!isHeadArr.length) {
